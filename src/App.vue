@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import AddTask from './views/AddTask.vue'
+import AddTask from './components/AddTask.vue'
 export default{
   components:{
     AddTask
