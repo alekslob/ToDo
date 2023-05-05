@@ -1,15 +1,17 @@
 <template>
     <div>
-        <input type="text" v-model="text" v-if="add" /><v-btn
-      class="mx-2"
-      fab
-      dark
-      color="indigo"
-    >
-      <v-icon dark>
-        mdi-plus
-      </v-icon>
-    </v-btn>
+        <form>
+            <v-text-field
+              v-model="text"
+              :rules="nameRules"
+              :counter="60"
+              label="Задача"
+              append-outer-icon="mdi-plus"
+              @click:append-outer="onClick"
+              required
+            > </v-text-field>
+
+        </form>
     </div>
 </template>
 <script>
@@ -17,18 +19,22 @@ export default{
     data:()=>({
         add: false,
         text: '',
-        tap:' tete'
+        tap:' tete',
+        nameRules: [
+        v => v.length <= 60 || 'Слишком много букав',
+    ]
     }),
     methods:{
         onClick(){
-            if (this.add){
-                this.tap = this.text
-            }
-            this.add = !this.add;
-            
+            this.text = "агада"
+            this.$emit('back', this.text)
         }
     }
     
 }
 </script>
-<style></style>
+<style>
+.text {
+    color: red;
+}
+</style>
