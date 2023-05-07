@@ -1,68 +1,47 @@
 <template>
   <div class="app" >
     <div class="title">
-      <v-container fluid>
-      <v-app-bar elevation="6" >
-        <v-spacer>ToDo</v-spacer>
-        <v-btn class="mx-4"
-               color="indigo" @click="onClick">
-            <v-icon dark>
-                mdi-plus
-            </v-icon>
-        </v-btn>
-      </v-app-bar>
+      <TitleBar @add_new="show_add"/>
       
-    <AddTask @back="getTask" v-if="add_new"/>
-    <v-list>
-      <v-list-item-group
-          v-model="selected"
-          active-class="pink--text"
-          multiple
-        >
-          <template v-for="item in list_tasks" :key="item.title" >
-            <v-list-item >
-              <template >
-                <v-list-item-content >
-                  <v-list-item-title v-text="item.title"></v-list-item-title>
-                  </v-list-item-content>
-                </template>
-              
-            </v-list-item>
-          </template>
-        </v-list-item-group>
-      </v-list>
-  </v-container>
+      <AddTask @back="getTask" v-if="add_task"/>
+      <TaskView :tasks="list_tasks" />
+      
     </div>
-    <div></div>
-</div>
+  </div>
 </template>
 
 <script>
-import AddTask from './components/AddTask.vue'
-// import TaskView from './components/TaskView.vue';
-export default{
+import TitleBar from './components/TitleBar.vue';
+import AddTask from './components/AddTask.vue';
+import TaskView from './components/TaskView.vue';
+
+export default({
   data:()=>({
-    add_new: false,
-    list_tasks:[
-      {title: 'кря'},
-      {title:'ага'},
-      {title:'да'}
-    ]
+    add_task: false,
+    list_tasks: [
+      {title: 'кря', select: false},
+      {title: 'да', select: true},
+      {title: 'бывает', select: false}
+    ],
+    text: "блабла"
+    
   }),
   methods:{
-    onClick(){
-      this.add_new = !this.add_new
+    show_add(){
+      this.add_task = !this.add_task
     },
     getTask(e){
-      this.add_new = false
-      if(e!='') this.list_tasks.push(e)
-    }
+      this.add_task = false
+      if(e!='') this.list_tasks.push({title:e, select:false})
+    },
+    
   },
   components:{
+    TitleBar,
     AddTask,
-    // TaskView
+    TaskView
   }
-}
+})
 </script>
 <style>
 

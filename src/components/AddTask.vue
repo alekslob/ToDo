@@ -26,7 +26,6 @@ export default{
     }),
     methods:{
         onClick(){
-            this.text = "агада"
             this.$emit('back', this.text)
         }
     }
