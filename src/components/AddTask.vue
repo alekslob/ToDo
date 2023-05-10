@@ -26,7 +26,9 @@ export default{
     }),
     methods:{
         onClick(){
-            this.$emit('back', this.text)
+            if (this.text.length<= 60) {
+                this.$emit('back', this.text)
+            }
         }
     }
     

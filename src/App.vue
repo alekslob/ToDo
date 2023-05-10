@@ -1,11 +1,12 @@
 <template>
   <div class="app" >
     <div class="title">
+      <v-app>
       <TitleBar @add_new="show_add"/>
       
       <AddTask @back="getTask" v-if="add_task"/>
       <TaskView :tasks="list_tasks" />
-      
+    </v-app>
     </div>
   </div>
 </template>
