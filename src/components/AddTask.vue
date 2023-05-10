@@ -1,17 +1,21 @@
 <template>
     <div>
-        <form>
+        <v-form @submit.prevent="onClick">
             <v-text-field
+              autofocus
+              ref="input"
+              hide-details
+              dense
               v-model="text"
               :rules="nameRules"
               :counter="60"
               label="Задача"
-              append-outer-icon="mdi-plus"
-              @click:append-outer="onClick"
+              
+              @blur="$emit('cancel')"
               required
             > </v-text-field>
 
-        </form>
+        </v-form>
     </div>
 </template>
 <script>
@@ -26,8 +30,10 @@ export default{
     }),
     methods:{
         onClick(){
-            if (this.text.length<= 60) {
-                this.$emit('back', this.text)
+            if (this.text.length <= 60) {
+                
+                this.$emit('addTask', this.text)
+                this.$refs.input.blur()
             }
         }
     }
